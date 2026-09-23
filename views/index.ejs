@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelby's Cocktail Recipes</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+
+    <h1>Shelby's Cocktail Recipes</h1>
+
+    <p>Find the perfect cocktail recipe for any occasion</p>
+
+    <form action="/search" method="POST">
+        <label for="cocktail">Search for a cocktail:</label>
+        <input
+            type="text"
+            id="cocktail"
+            name="cocktail"
+            placeholder="Try Margarita..."
+            required
+        >
+        <button type="submit">Find Recipe</button>
+    </form>
+
+<% if (error) { %>
+  <p><strong><%= error %></strong></p>
+<% } %>
+
+    <% if (drink) { %>
+
+  <hr>
+
+ <div class="recipe-card">
+
+  <h2><%= drink.strDrink %></h2>
+
+  <img
+    src="<%= drink.strDrinkThumb %>"
+    alt="<%= drink.strDrink %>"
+    width="300"
+  >
+
+  <p><strong>Category:</strong> <%= drink.strCategory %></p>
+
+  <p><strong>Type:</strong> <%= drink.strAlcoholic %></p>
+
+  <p><strong>Glass:</strong> <%= drink.strGlass %></p>
+
+  <h3>Ingredients</h3>
+
+<ul>
+  <% for (let i = 1; i <= 15; i++) { %>
+
+    <% if (drink[`strIngredient${i}`]) { %>
+
+      <li>
+        <%= drink[`strMeasure${i}`] || "" %>
+        <%= drink[`strIngredient${i}`] %>
+      </li>
+
+    <% } %>
+
+  <% } %>
+</ul>
+
+  <h3>Instructions</h3>
+
+  <p><%= drink.strInstructions %></p>
+
+  </div>
+
+<% } %>
+
+</body>
+
+</html>
